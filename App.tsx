@@ -9,22 +9,16 @@ import React from 'react';
 
 import {
   SafeAreaView,
-  StyleSheet,
   Text,
-  View,
 } from 'react-native';
+import AppEntry from './src/navigation/AppEntry';
 
-function App(): React.JSX.Element {
-
+const App = () =>{
 
   return (
-    <SafeAreaView>
-      <Text>"Hello there"</Text>
-    </SafeAreaView>
+    <AppEntry />
   );
 }
 
-const styles = StyleSheet.create({
-});
 
 export default App;
