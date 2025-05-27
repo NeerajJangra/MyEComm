@@ -1,38 +1,62 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
 import {COLORS, SIZES} from '../constants';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import WarningModal from '../components/WarningModal';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState<string>('');
   const navigation = useNavigation();
 
   const handleLogin = () => {
     if (email === 'test' && password === 'test') {
       navigation.replace('Home');
     } else {
-      Alert.alert('Login Failed', 'Invalid email or password');
+      setMessage('Invalid email or password');
+      setShowModal(true);
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Email</Text>
-      <TextInput value={email} onChangeText={setEmail} style={styles.input} placeholder='Please enter Email'/>
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+        placeholder="Please enter Email"
+      />
       <Text style={styles.label}>Password</Text>
       <TextInput
         value={password}
         onChangeText={setPassword}
         style={styles.input}
         secureTextEntry
-        placeholder='Please enter Password'
+        placeholder="Please enter Password"
       />
-      <Button title="Login" color={COLORS.primary} onPress={handleLogin} disabled={!email}/>
-      <Text style={{marginVertical: 10, textAlign: 'center'}} >
+      <Button
+        title="Login"
+        color={COLORS.primary}
+        onPress={handleLogin}
+        disabled={!email}
+      />
+      <Text style={{marginVertical: 10, textAlign: 'center'}}>
         Don't have an account?{' '}
-        </Text>
-      <Button title="Register" onPress={() => navigation.navigate('Register')} />
+      </Text>
+      <Button
+        title="Register"
+        onPress={() => navigation.navigate('Register')}
+      />
+      <WarningModal
+        visible={showModal}
+        message={message}
+        onClose={() => {
+          setShowModal(false);
+        }}
+      />
     </View>
   );
 };
@@ -44,8 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: COLORS.lightWhite,
   },
-  label: {marginBottom: 8, fontSize: SIZES.medium,
-},
+  label: {marginBottom: 8, fontSize: SIZES.medium},
   input: {
     borderColor: '#999',
     borderWidth: 1,
