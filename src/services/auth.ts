@@ -13,8 +13,6 @@ export const Auth = {
         throw new Error(JSON.stringify(data.message));
       }
 
-      return data
-      
-    
+      return data;
   },
 };

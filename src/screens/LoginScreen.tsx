@@ -3,36 +3,33 @@ import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import {COLORS, SIZES} from '../constants';
 import {useNavigation} from '@react-navigation/native';
 import WarningModal from '../components/WarningModal';
-import { Auth } from '../services/auth';
+import {Auth} from '../services/auth';
+import {UserManagement} from '../core/UserManagement';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('emilys');
+  const [password, setPassword] = useState<string>('emilyspass');
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState<string>('');
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    console.log("handleLogin")
     try {
       const userData = await Auth.loginUser(email, password);
-      console.log({userData})
-      
+      const accessToken = JSON.stringify(userData.accessToken);
+      await UserManagement.saveToken(accessToken);
+      navigation.replace('Home')
     } catch (error) {
-      console.log("error in handleLogin", error);
       setMessage(error.message || 'Something went wrong');
-      setShowModal(true)
-
+      setShowModal(true);
     }
-    // } else {
-    //   setMessage('Invalid email or password');
-    //   setShowModal(true);
-    // }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textLine}>Please Login the user from https://dummyjson.com/users</Text>
+      <Text style={styles.textLine}>
+        Please Login the user from https://dummyjson.com/users
+      </Text>
       <Text style={styles.label}>Email/Username</Text>
       <TextInput
         value={email}
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
   },
   textLine: {
     color: COLORS.red,
-  }
+  },
 });
 
 export default LoginScreen;
