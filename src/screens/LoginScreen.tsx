@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import {COLORS, SIZES} from '../constants';
 import {useNavigation} from '@react-navigation/native';
 import WarningModal from '../components/WarningModal';
+import { Auth } from '../services/auth';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('');
@@ -11,18 +12,28 @@ const LoginScreen = () => {
   const [message, setMessage] = useState<string>('');
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    if (email === 'test' && password === 'test') {
-      navigation.replace('Home');
-    } else {
-      setMessage('Invalid email or password');
-      setShowModal(true);
+  const handleLogin = async () => {
+    console.log("handleLogin")
+    try {
+      const userData = await Auth.loginUser(email, password);
+      console.log({userData})
+      
+    } catch (error) {
+      console.log("error in handleLogin", error);
+      setMessage(error.message || 'Something went wrong');
+      setShowModal(true)
+
     }
+    // } else {
+    //   setMessage('Invalid email or password');
+    //   setShowModal(true);
+    // }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Email</Text>
+      <Text style={styles.textLine}>Please Login the user from https://dummyjson.com/users</Text>
+      <Text style={styles.label}>Email/Username</Text>
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -41,7 +52,7 @@ const LoginScreen = () => {
         title="Login"
         color={COLORS.primary}
         onPress={handleLogin}
-        disabled={!email}
+        disabled={!email || !password}
       />
       <Text style={{marginVertical: 10, textAlign: 'center'}}>
         Don't have an account?{' '}
@@ -76,6 +87,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 10,
   },
+  textLine: {
+    color: COLORS.red,
+  }
 });
 
 export default LoginScreen;
