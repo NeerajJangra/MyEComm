@@ -1,4 +1,4 @@
-const BASE_URL = 'https://dummyjson.com';
+import { BASE_URL } from "../config";
 
 export const Auth = {
   loginUser: async (username: string, password: string) => {

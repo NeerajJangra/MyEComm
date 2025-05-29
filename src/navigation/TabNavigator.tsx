@@ -4,6 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { COLORS } from '../constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,9 +21,10 @@ const TabNavigator = () => {
           if (route.name === 'Cart') iconName = focused ? 'cart' : 'cart-outline';
           if (route.name === 'Profile') iconName = focused ? 'person' : 'person-outline';
 
-          return <Icon name={iconName} size={24} color={focused ? '#2A4D50' : '#999'} />;
+          return <Icon name={iconName} size={24} color={focused ? COLORS.primary : '#999'} />;
         },
         tabBarStyle: {
+          justifyContent: 'center',
           height: 60,
           paddingBottom: 5,
         },
