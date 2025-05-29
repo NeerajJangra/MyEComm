@@ -2369,6 +2369,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/bottom-tabs@npm:^7.3.13":
+  version: 7.3.13
+  resolution: "@react-navigation/bottom-tabs@npm:7.3.13"
+  dependencies:
+    "@react-navigation/elements": ^2.4.2
+    color: ^4.2.3
+  peerDependencies:
+    "@react-navigation/native": ^7.1.9
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-screens: ">= 4.0.0"
+  checksum: 2387205f6f8689bcfc7f6b50cc66e1b6108fee02eb18ae6a801586f8499d3e9f589e98110a6a4128d4c5be2072ccafdd8590ac2d3081fa5393f72bdc4cf039bb
+  languageName: node
+  linkType: hard
+
 "@react-navigation/core@npm:^7.9.2":
   version: 7.9.2
   resolution: "@react-navigation/core@npm:7.9.2"
@@ -2867,6 +2883,7 @@ __metadata:
     "@react-native/eslint-config": 0.79.2
     "@react-native/metro-config": 0.79.2
     "@react-native/typescript-config": 0.79.2
+    "@react-navigation/bottom-tabs": ^7.3.13
     "@react-navigation/native": ^7.1.9
     "@react-navigation/native-stack": ^7.3.13
     "@types/jest": ^29.5.13
@@ -4763,14 +4780,14 @@ __metadata:
   linkType: hard
 
 "fdir@npm:^6.4.4":
-  version: 6.4.4
-  resolution: "fdir@npm:6.4.4"
+  version: 6.4.5
+  resolution: "fdir@npm:6.4.5"
   peerDependencies:
     picomatch: ^3 || ^4
   peerDependenciesMeta:
     picomatch:
       optional: true
-  checksum: 79043610236579ffbd0647c508b43bd030a2d034a17c43cf96813a00e8e92e51acdb115c6ddecef3b5812cc2692b976155b4f6413e51e3761f1e772fa019a321
+  checksum: 14efd2d6617a6f9fb314916ccff64e00bdb96216f26542ec9dfa532ed60a7ebb45463f7009aa215c14071566bf43caeb8ba268ccb52a11e6b51e4aaa8cb58d81
   languageName: node
   linkType: hard
 
