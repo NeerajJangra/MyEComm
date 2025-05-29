@@ -1,16 +1,19 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import {COLORS, SIZES} from '../constants';
+import WarningModal from '../components/WarningModal';
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState('');
   const navigation = useNavigation();
 
   const handleRegister = () => {
-    Alert.alert('Registration Successful', 'You can now login.');
-    navigation.goBack();
+    setMessage('Registration successful! You can now log in.');
+    setShowModal(true);
   };
 
   return (
@@ -30,6 +33,14 @@ const RegisterScreen = () => {
         secureTextEntry
       />
       <Button title="Register" onPress={handleRegister} />
+      <WarningModal
+        visible={showModal}
+        message={message}
+        onClose={() => {
+          setShowModal(false);
+          navigation.goBack();
+        }}
+      />
     </View>
   );
 };
