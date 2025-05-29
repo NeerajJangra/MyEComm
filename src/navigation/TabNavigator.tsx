@@ -1,18 +1,32 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
-import CartScreen from '../screens/CartScreen'; //
+import CartScreen from '../screens/CartScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: true,
-        tabBarLabelStyle: { fontSize: 12 },
-      }}
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: string = 'home';
+
+          if (route.name === 'Home') iconName = focused ? 'home' : 'home-outline';
+          if (route.name === 'Cart') iconName = focused ? 'cart' : 'cart-outline';
+          if (route.name === 'Profile') iconName = focused ? 'person' : 'person-outline';
+
+          return <Icon name={iconName} size={24} color={focused ? '#2A4D50' : '#999'} />;
+        },
+        tabBarStyle: {
+          height: 60,
+          paddingBottom: 5,
+        },
+      })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />

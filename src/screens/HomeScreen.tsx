@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 const HomeScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <View>
       <Text>HomeScreen</Text>
@@ -12,4 +12,4 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default HomeScreen;
