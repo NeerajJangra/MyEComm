@@ -2431,6 +2431,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/elements@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "@react-navigation/elements@npm:2.4.3"
+  dependencies:
+    color: ^4.2.3
+  peerDependencies:
+    "@react-native-masked-view/masked-view": ">= 0.2.0"
+    "@react-navigation/native": ^7.1.10
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-safe-area-context: ">= 4.0.0"
+  peerDependenciesMeta:
+    "@react-native-masked-view/masked-view":
+      optional: true
+  checksum: da5950fbb8040f2266dbeb09c89249d759fb9dfdb475707115a2b2ec7ce9b78df253c7851cb6207bb38d624d2506573b8a1cbdc01ce3901c68db74da960c291f
+  languageName: node
+  linkType: hard
+
 "@react-navigation/native-stack@npm:^7.3.13":
   version: 7.3.13
   resolution: "@react-navigation/native-stack@npm:7.3.13"
@@ -2469,6 +2487,23 @@ __metadata:
   dependencies:
     nanoid: ^3.3.11
   checksum: cc3fb52957220adb8486c5546c78e4a9a92863f44368e5aeec74e6d3a31a9930d24e0cf022d91a7074a8e7d779690e11994f8f1254aaf0035d0d55b1656d8a3f
+  languageName: node
+  linkType: hard
+
+"@react-navigation/stack@npm:^7.3.3":
+  version: 7.3.3
+  resolution: "@react-navigation/stack@npm:7.3.3"
+  dependencies:
+    "@react-navigation/elements": ^2.4.3
+    color: ^4.2.3
+  peerDependencies:
+    "@react-navigation/native": ^7.1.10
+    react: ">= 18.2.0"
+    react-native: "*"
+    react-native-gesture-handler: ">= 2.0.0"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-screens: ">= 4.0.0"
+  checksum: 47040bc7d57c2048983fe83f1861de9c446605aa8323b863ec362c5292824b9652578c44823ddecb7b1ab185fe7564da962765a8b789e2c4c828e69790fa1c35
   languageName: node
   linkType: hard
 
@@ -2898,6 +2933,7 @@ __metadata:
     "@react-navigation/bottom-tabs": ^7.3.13
     "@react-navigation/native": ^7.1.9
     "@react-navigation/native-stack": ^7.3.13
+    "@react-navigation/stack": ^7.3.3
     "@types/jest": ^29.5.13
     "@types/react": ^19.0.0
     "@types/react-test-renderer": ^19.0.0
@@ -2913,6 +2949,7 @@ __metadata:
     react-native-vector-icons: ^10.2.0
     react-test-renderer: 19.0.0
     typescript: 5.0.4
+    zustand: ^5.0.5
   languageName: unknown
   linkType: soft
 
@@ -9566,5 +9603,26 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "zustand@npm:5.0.5"
+  peerDependencies:
+    "@types/react": ">=18.0.0"
+    immer: ">=9.0.6"
+    react: ">=18.0.0"
+    use-sync-external-store: ">=1.2.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+    use-sync-external-store:
+      optional: true
+  checksum: 9f4fa5d7152c6b5a9cbcccb08ae34500c7495f8707549e7a8de3cea2844a75a81b4acc69a85601dbe539ee91f69c2d25d4e5286eb973bc76292a2012256061cb
   languageName: node
   linkType: hard

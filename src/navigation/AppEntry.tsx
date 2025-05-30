@@ -1,24 +1,42 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../screens/LoginScreen';
-// import HomeScreen from '../screens/HomeScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import TabNavigator from './TabNavigator';
+import LoginScreen from './../screens/LoginScreen';
+import RegisterScreen from './../screens//RegisterScreen';
+import { ActivityIndicator, View } from 'react-native';
+import TabNavigator from './../navigation/TabNavigator';
+import { useAuth } from '../core/context/AuthContext';
+import { COLORS } from '../constants';
 
 const Stack = createNativeStackNavigator();
 
-
 const AppEntry = () => {
+  const { isLoading, isAuthenticated } = useAuth();
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={COLORS.primary}/>
+      </View>
+    );
+  }
+
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Login" component={LoginScreen}/>
-            <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="Home" component={TabNavigator}/>
+      {isAuthenticated ? (
+        // Authenticated Navigator
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={TabNavigator} />
         </Stack.Navigator>
+      ) : (
+        // Unauthenticated Navigator
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
-  )
-}
+  );
+};
 
 export default AppEntry

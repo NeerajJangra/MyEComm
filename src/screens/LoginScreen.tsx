@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import WarningModal from '../components/WarningModal';
 import {Auth} from '../services/auth';
 import {UserManagement} from '../core/UserManagement';
+import { useAuth } from '../core/context/AuthContext';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('emilys');
@@ -12,13 +13,15 @@ const LoginScreen = () => {
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState<string>('');
   const navigation = useNavigation();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
       const userData = await Auth.loginUser(email, password);
       const accessToken = JSON.stringify(userData.accessToken);
-      await UserManagement.saveToken(accessToken);
-      navigation.replace('Home');
+      // await UserManagement.saveToken(accessToken);
+      await login(accessToken)
+      // // navigation.replace('Home');
     } catch (error) {
       setMessage(error.message || 'Something went wrong');
       setShowModal(true);

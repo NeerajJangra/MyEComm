@@ -1,24 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-
-import {
-  SafeAreaView,
-  Text,
-} from 'react-native';
+import { AuthProvider } from './src/core/context/AuthContext';
 import AppEntry from './src/navigation/AppEntry';
 
-const App = () =>{
-
+const App = () => {
   return (
-    <AppEntry />
+    <AuthProvider>
+      <AppEntry />
+    </AuthProvider>
   );
 }
-
 
 export default App;

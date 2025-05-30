@@ -12,7 +12,6 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: false,
         tabBarShowLabel: false,
         tabBarIcon: ({ focused }) => {
           let iconName: string = 'home';
