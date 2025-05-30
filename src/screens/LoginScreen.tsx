@@ -18,7 +18,7 @@ const LoginScreen = () => {
       const userData = await Auth.loginUser(email, password);
       const accessToken = JSON.stringify(userData.accessToken);
       await UserManagement.saveToken(accessToken);
-      navigation.replace('Home')
+      navigation.replace('Home');
     } catch (error) {
       setMessage(error.message || 'Something went wrong');
       setShowModal(true);
