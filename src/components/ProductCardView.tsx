@@ -28,10 +28,9 @@ const ProductCardView: React.FC<Props> = ({ product, onPress }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: '40%',
+    width: '47%',
     height: 200,
     // borderWidth: 2,
-    margin: SIZES.medium,
     backgroundColor: COLORS.secondary,
     padding: SIZES.xSmall,
     borderRadius: SIZES.small,
