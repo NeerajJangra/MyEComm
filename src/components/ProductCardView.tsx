@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export interface Product {
   id: number;
@@ -20,8 +21,13 @@ const ProductCardView: React.FC<Props> = ({ product, onPress }) => {
       <View style={styles.imageContainer}>
       <Image source={{ uri: product.thumbnail }} style={styles.image} />
       </View>
-      <Text numberOfLines={1} style={styles.title}>{product.title}</Text>
+        <Text numberOfLines={1} style={styles.title}>{product.title}</Text>
+      <View style={styles.row}>
       <Text style={styles.price}>₹ {product.price}</Text>
+      <TouchableOpacity onPress={()=>console.log("adding item to cart")} style={styles.addIcon}>
+      <Icon name="cart-outline" size={20} color={COLORS.white} />
+    </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -60,6 +66,17 @@ const styles = StyleSheet.create({
     fontSize: SIZES.small,
     color: COLORS.black,
   },
+  addIcon: {
+  backgroundColor: COLORS.primary,
+  padding: 6,
+  borderRadius: 20,
+  },
+  row: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginTop: SIZES.xSmall,
+},
 });
 
 export default ProductCardView;
