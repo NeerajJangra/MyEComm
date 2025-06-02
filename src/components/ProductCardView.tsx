@@ -1,7 +1,8 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { COLORS, SIZES } from '../constants/theme';
+import React, {useEffect} from 'react';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {COLORS, SIZES} from '../constants/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {cartActions, useCartStore} from '../core/useCartStore';
 
 export interface Product {
   id: number;
@@ -15,18 +16,34 @@ interface Props {
   onPress?: () => void;
 }
 
-const ProductCardView: React.FC<Props> = ({ product, onPress }) => {
+const ProductCardView: React.FC<Props> = ({product, onPress}) => {
+  // const cartItems = useCartStore((state)=> state.cartItems);
+
+  // useEffect(() => {
+  //   console.log({cartItems});
+  // }, [cartItems]);
+
+  const onAddToCart = () => {
+    console.log({product});
+    const {addToCart} = cartActions;
+    addToCart(product);
+  };
+
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.imageContainer}>
-      <Image source={{ uri: product.thumbnail }} style={styles.image} />
+        <Image source={{uri: product.thumbnail}} style={styles.image} />
       </View>
-        <Text numberOfLines={1} style={styles.title}>{product.title}</Text>
+      <Text numberOfLines={1} style={styles.title}>
+        {product.title}
+      </Text>
       <View style={styles.row}>
-      <Text style={styles.price}>₹ {product.price}</Text>
-      <TouchableOpacity onPress={()=>console.log("adding item to cart")} style={styles.addIcon}>
-      <Icon name="cart-outline" size={20} color={COLORS.white} />
-    </TouchableOpacity>
+        <Text style={styles.price}>₹ {product.price}</Text>
+        <TouchableOpacity
+          onPress={() => onAddToCart()}
+          style={styles.addIcon}>
+          <Icon name="cart-outline" size={20} color={COLORS.white} />
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -43,7 +60,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.flatten({
       shadowColor: COLORS.black,
       shadowOpacity: 0.1,
-      shadowOffset: { width: 0, height: 1 },
+      shadowOffset: {width: 0, height: 1},
       elevation: 2,
     }),
   },
@@ -59,7 +76,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: SIZES.medium,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: COLORS.black,
   },
   price: {
@@ -67,16 +84,16 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   addIcon: {
-  backgroundColor: COLORS.primary,
-  padding: 6,
-  borderRadius: 20,
+    backgroundColor: COLORS.primary,
+    padding: 6,
+    borderRadius: 20,
   },
   row: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginTop: SIZES.xSmall,
-},
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: SIZES.xSmall,
+  },
 });
 
 export default ProductCardView;

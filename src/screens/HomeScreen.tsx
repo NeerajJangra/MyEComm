@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontWeight: 'bold',
   },
-  container: {flex: 1, padding: SIZES.medium},
+  container: {flex: 1, padding: SIZES.medium, backgroundColor: COLORS.gray2},
   filterList: {minHeight: 40},
   filterBtn: {
     height: 30,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SIZES.medium,
     borderRadius: SIZES.medium,
     justifyContent: 'center',
-    backgroundColor: COLORS.gray2,
+    backgroundColor: COLORS.tertiary,
   },
   filterBtnSelected: {
     backgroundColor: COLORS.primary,
