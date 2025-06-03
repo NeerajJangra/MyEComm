@@ -10,6 +10,7 @@ import {
   Button,
   Text,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { COLORS, SIZES, SHADOWS } from '../constants';
 
@@ -198,10 +199,13 @@ const ProfileScreen = () => {
   };
 
   const handleTakePhoto = async() => {
-    //TODO: integrate the camera module
-    const result = await takePhoto();
-    // console.log({result})
-    setProofImage(result)
+    if(Platform.OS == 'ios'){
+      Alert.alert("COMING SOON", "This feature will soon be available on iOS devices" )
+    }else{
+      const result = await takePhoto();
+      // console.log({result})
+      setProofImage(result)
+    }
     
   }
 
