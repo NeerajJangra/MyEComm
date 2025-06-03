@@ -12,7 +12,7 @@ const PhotoSection = ({strings, isDarkTheme, proofImage, onTakePhoto}) => {
       </View>
       {/* Display proof image if available */}
       {proofImage && (
-        <Image source={{uri: proofImage}} style={styles.proofImage} />
+        <Image source={{uri: proofImage.uri}} style={styles.proofImage} />
       )}
 
       <TouchableOpacity

@@ -18,6 +18,31 @@ const COLORS = {
   lightWhite: "#FAFAFC",
 };
 
+export const lightTheme = {
+  background: "#FFFFFF",
+  secondBackground: COLORS.gray2,
+  thirdBackground: '#FFFFFF',
+  text: "#000000",
+  card: "#F3F4F8",
+  secondText: COLORS.primary,
+  buttonColor: COLORS.primary
+};
+
+export const darkTheme = {
+  background: COLORS.primary,
+  secondBackground: COLORS.primary,
+  thirdBackground: "black",
+  text: "#FFFFFF",
+  card: "#333333",
+  secondText: "#DDF0FF",
+  buttonColor: "green",
+};
+
+export const THEME_TYPES = {
+  LIGHT: 'light',
+  DARK: 'dark',
+};
+
 
 const SIZES = {
   xSmall: 10,

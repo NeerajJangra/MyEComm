@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet, ImageBackground} from 'react-native';
 import {COLORS, SIZES} from '../constants';
 import {useNavigation} from '@react-navigation/native';
 import WarningModal from '../components/WarningModal';
 import {Auth} from '../services/auth';
 import {UserManagement} from '../core/UserManagement';
 import { useAuth } from '../core/context/AuthContext';
+import { useThemeStore } from '../core/useThemeStore';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('emilys');
@@ -14,6 +15,8 @@ const LoginScreen = () => {
   const [message, setMessage] = useState<string>('');
   const navigation = useNavigation();
   const { login } = useAuth();
+  
+  const { themeColors} = useThemeStore()
 
   const handleLogin = async () => {
     try {
@@ -29,18 +32,28 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    // <ImageBackground
+    //   source={require('../assets/Login-Background.jpg')}
+    //   style={styles.background}
+    //   resizeMode="stretch" // or 'contain', 'stretch'
+    // >
+    <View style={[styles.container, {backgroundColor: themeColors.background}]}>
       <Text style={styles.textLine}>
         Please Login the user from https://dummyjson.com/users
       </Text>
-      <Text style={styles.label}>Email/Username</Text>
+      <Text style={{color: themeColors.text}}>
+        Use these credentials:
+        UserName: "emilys"
+        Password: "emilyspass"
+      </Text>
+      <Text style={[styles.label, {color: themeColors.text}]}>Email/Username</Text>
       <TextInput
         value={email}
         onChangeText={setEmail}
-        style={styles.input}
+        style={[styles.input, {color: themeColors.text}]}
         placeholder="Please enter Email"
       />
-      <Text style={styles.label}>Password</Text>
+      <Text style={[styles.label, {color: themeColors.text}]}>Password</Text>
       <TextInput
         value={password}
         onChangeText={setPassword}
@@ -50,11 +63,11 @@ const LoginScreen = () => {
       />
       <Button
         title="Login"
-        color={COLORS.primary}
+        color={themeColors.buttonColor}
         onPress={handleLogin}
         disabled={!email || !password}
       />
-      <Text style={{marginVertical: 10, textAlign: 'center'}}>
+      <Text style={[ styles.label,{marginVertical: 10, textAlign: 'center', color: themeColors.text}]}>
         Don't have an account?{' '}
       </Text>
       <Button
@@ -69,6 +82,7 @@ const LoginScreen = () => {
         }}
       />
     </View>
+    // </ImageBackground>
   );
 };
 
@@ -77,7 +91,13 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: COLORS.lightWhite,
+    // backgroundColor: COLORS.lightWhite,
+  },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  
   },
   label: {marginBottom: 8, fontSize: SIZES.medium},
   input: {
@@ -89,6 +109,7 @@ const styles = StyleSheet.create({
   },
   textLine: {
     color: COLORS.red,
+    fontSize: SIZES.medium
   },
 });
 

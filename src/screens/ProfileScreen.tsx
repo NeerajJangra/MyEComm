@@ -11,8 +11,6 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import CameraModule from '../bridges/CameraModule';
 import { COLORS, SIZES, SHADOWS } from '../constants';
 
 // Import components
@@ -21,20 +19,24 @@ import OrdersList from './../components/OrderList';
 import ProofModal from '../components/ProofModal';
 import { useAuth } from '../core/context/AuthContext';
 import { UserManagement } from '../core/UserManagement';
+import useCamera from '../hooks/useCamera';
+import { useThemeStore } from '../core/useThemeStore';
 
-const ProfileScreen = ({ navigation, theme, language }) => {
+const ProfileScreen = () => {
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [proofModalVisible, setProofModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [proofImage, setProofImage] = useState(null);
+  const [proofImage, setProofImage] = useState('');
   const [condition, setCondition] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [rating, setRating] = useState(0);
   const [comments, setComments] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const {logout} = useAuth();
+  const {takePhoto} = useCamera()
+  const {toggleTheme, themeColors, currentTheme} = useThemeStore()
   
 
   // Language strings
@@ -94,7 +96,7 @@ const ProfileScreen = ({ navigation, theme, language }) => {
   };
 
   const currentStrings = strings[selectedLanguage] || strings.en;
-  const isDarkTheme = theme === 'dark';
+  const isDarkTheme = currentTheme === 'dark';
 
   useEffect(() => {
     loadUserData();
@@ -160,7 +162,7 @@ const ProfileScreen = ({ navigation, theme, language }) => {
 
 
   const handleSubmitProof = async () => {
-    if (!proofImage || !condition || rating === 0) {
+    if (!proofImage || rating === 0) {
       Alert.alert('Error', 'Please fill all required fields and add a photo');
       return;
     }
@@ -195,9 +197,12 @@ const ProfileScreen = ({ navigation, theme, language }) => {
     }
   };
 
-  const handleTakePhoto = () => {
+  const handleTakePhoto = async() => {
     //TODO: integrate the camera module
-    console.log("cameraModule")
+    const result = await takePhoto();
+    // console.log({result})
+    setProofImage(result)
+    
   }
 
   const resetProofModal = () => {
@@ -214,7 +219,7 @@ const ProfileScreen = ({ navigation, theme, language }) => {
   };
 
   const onThemePress = () => {
-
+    toggleTheme()
   }
 
   const onChangeLanguage = () => {
@@ -228,15 +233,15 @@ const ProfileScreen = ({ navigation, theme, language }) => {
 
   if (loading) {
     return (
-      <View style={[styles.loadingContainer, isDarkTheme && styles.containerDark]}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
+      <View style={[styles.loadingContainer, {backgroundColor: themeColors.background}]}>
+        <ActivityIndicator size="large" color={themeColors.text} />
       </View>
     );
   }
 
 
   return (
-    <SafeAreaView style={[styles.container, isDarkTheme && styles.containerDark]}>
+    <SafeAreaView style={[styles.container, {backgroundColor: themeColors.thirdBackground}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProfileHeader 
           user={user} 
