@@ -12,6 +12,7 @@ import {COLORS, SIZES, SHADOWS} from '../constants';
 import OrderSummary from './form/OrderSummary';
 import PhotoSection from './form/PhotoSection';
 import RatingSection from './form/RatingSection';
+import { useThemeStore } from '../core/useThemeStore';
 
 const ProofModal = ({
   visible,
@@ -26,6 +27,7 @@ const ProofModal = ({
   onRatingChange,
   onSubmit,
 }) => {
+  const {themeColors} = useThemeStore()
   return (
     <Modal
       visible={visible}
@@ -47,6 +49,7 @@ const ProofModal = ({
               style={[
                 styles.submitButton,
                 submitting && styles.submitButtonDisabled,
+                {color: themeColors.text }
               ]}>
               {submitting ? '...' : strings.submit}
             </Text>
