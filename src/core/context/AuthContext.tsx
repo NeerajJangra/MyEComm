@@ -4,7 +4,7 @@ import { UserManagement } from '../UserManagement';
 interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (token: string) => Promise<void>;
+  login: (token: string, userData: {}) => Promise<void>;
   logout: () => Promise<void>;
   checkAuthStatus: () => Promise<void>;
 }
@@ -32,9 +32,10 @@ export const AuthProvider = ({ children }: any) => {
     }
   };
 
-  const login = async (token: string): Promise<void> => {
+  const login = async (token: string, userData: any): Promise<void> => {
     try {
       await UserManagement.saveToken(token);
+      await UserManagement.saveUser(userData)
       setIsAuthenticated(true);
     } catch (error) {
       console.error('Login error: ', error);
@@ -46,6 +47,7 @@ export const AuthProvider = ({ children }: any) => {
     try {
       console.log("clearing token")
       await UserManagement.removeToken();
+      await UserManagement.removeUser()
       setIsAuthenticated(false);
     } catch (error) {
       console.error('Logout error:', error);
