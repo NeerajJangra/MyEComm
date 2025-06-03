@@ -9,8 +9,8 @@ import { useAuth } from '../core/context/AuthContext';
 import { useThemeStore } from '../core/useThemeStore';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState<string>('emilys');
-  const [password, setPassword] = useState<string>('emilyspass');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState<string>('');
   const navigation = useNavigation();

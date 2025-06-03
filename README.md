@@ -41,22 +41,20 @@ MyEComm/
 
 ## 📸 Screenshots
 
-- Product list
-![alt text](screenshots/image.png)
+### 🛍️ Product List
+<img src="screenshots/image.png" alt="Product List" width="400"/>
 
-- Product list on the basis of category
-![alt text](screenshots/image-1.png)
+### 🗂️ Product List by Category
+<img src="screenshots/image-1.png" alt="Product List by Category" width="400"/>
 
-- Cart
-![alt text](screenshots/image-2.png)
+### 🛒 Cart
+<img src="screenshots/image-2.png" alt="Cart" width="400"/>
 
-- Proof of delivery
-![alt text](screenshots/image-3.png)
-![alt text](screenshots/image-5.png)
-
-
-- Theme changer
-![alt text](screenshots/image-4.png)
+### 📦 Proof of Delivery
+<p float="left">
+  <img src="screenshots/image-3.png" alt="Proof of Delivery 1" width="300"/>
+  <img src="screenshots/image-5.png" alt="Proof of Delivery 2" width="300"/>
+</p>
 
 
 ## 📐 Architecture Diagram
