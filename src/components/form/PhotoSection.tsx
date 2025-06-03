@@ -1,18 +1,20 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
+import { useThemeStore } from '../../core/useThemeStore';
 
 const PhotoSection = ({strings, isDarkTheme, proofImage, onTakePhoto}) => {
+    const {themeColors} = useThemeStore()
   return (
     <View style={[styles.container, isDarkTheme && styles.darkContainer]}>
       <View style={styles.textView}>
         <Text style={{color: 'red', fontSize: 16, fontWeight: '600'}}>* </Text>
-        <Text style={{fontSize: 16, fontWeight: '600'}}>
+        <Text style={{color: themeColors.text,fontSize: 16, fontWeight: '600'}}>
           Please Upload the For Proof Purpose
         </Text>
       </View>
       {/* Display proof image if available */}
       {proofImage && (
-        <Image source={{uri: proofImage}} style={styles.proofImage} />
+        <Image source={{uri: proofImage.uri}} style={styles.proofImage} />
       )}
 
       <TouchableOpacity

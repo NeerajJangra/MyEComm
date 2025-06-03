@@ -3,11 +3,14 @@ import {View, Text, FlatList, Button, StyleSheet, Image} from 'react-native';
 // import { useCart } from '../context/CartContext';
 import {COLORS, SIZES} from '../constants/theme';
 import {cartActions, useCartStore} from '../core/useCartStore';
+import { useThemeStore } from '../core/useThemeStore';
 // import {Image} from 'react-native-reanimated/lib/typescript/Animated';
 
 const CartScreen = () => {
   const cartItems = useCartStore(state => state.cartItems);
   const {updateQuantity, removeFromCart} = cartActions;
+  
+  const {themeColors} = useThemeStore()
 
   const renderItem = ({item}: any) => (
     <View style={styles.card}>
@@ -43,20 +46,20 @@ const CartScreen = () => {
   const renderEmptyList = () => {
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
-        <Text style={{fontSize: 20}}>Your Cart Is Empty</Text>
+        <Text style={{fontSize: 20, color: themeColors.text}}>Your Cart Is Empty</Text>
       </View>
     )
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: themeColors.secondBackground}]}>
       <FlatList
         data={cartItems}
         keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
         ListEmptyComponent={renderEmptyList}
       />
-      <Text style={styles.total}>Total: ₹{total.toFixed(2)}</Text>
+      <Text style={[styles.total, {color: themeColors.text}]}>Total: ₹{total.toFixed(2)}</Text>
     </View>
   );
 };
@@ -91,3 +94,5 @@ const styles = StyleSheet.create({
 });
 
 export default CartScreen;
+
+

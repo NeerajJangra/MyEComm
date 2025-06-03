@@ -12,6 +12,7 @@ import {ProductAPI} from '../services/Product';
 import {COLORS, SIZES} from '../constants/theme';
 import Product from '../components/ProductCardView';
 import ProductCardView from '../components/ProductCardView';
+import { useThemeStore } from '../core/useThemeStore';
 
 interface Product {
   id: number;
@@ -26,6 +27,7 @@ const HomeScreen: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(false);
+  const { themeColors } = useThemeStore();
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -59,17 +61,16 @@ const HomeScreen: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: themeColors.background}]}>
       <View style={styles.heading}>
-        <Text style={[styles.wlcmText, {color: COLORS.black}]}>
+        <Text style={[styles.wlcmText, {color: COLORS.black} , {color: themeColors.text}]}>
           Find The Most
         </Text>
-        <Text style={styles.wlcmText}>Amazing Products</Text>
+        <Text style={[styles.wlcmText, {color: themeColors.secondText}]}>Amazing Products</Text>
       </View>
       <FlatList
         horizontal
         data={categories}
-        // keyExtractor={(item) => item}
         showsHorizontalScrollIndicator={false}
         style={styles.filterList}
         renderItem={({item}) => (
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.tertiary,
   },
   filterBtnSelected: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: "green",
   },
   filterText: {
     color: COLORS.white,
