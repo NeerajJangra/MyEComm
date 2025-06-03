@@ -38,7 +38,6 @@ MyEComm/
 └── README.md
 ```
 
-```
 
 ## 📸 Screenshots
 
